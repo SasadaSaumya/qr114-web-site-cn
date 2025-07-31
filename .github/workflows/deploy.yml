@@ -1,0 +1,43 @@
+# Name of the workflow
+name: Deploy Website to Production
+
+# Run this workflow every time code is pushed to the 'main' branch
+on:
+  push:
+    branches: [ main ]
+
+# Define the jobs to run
+jobs:
+  build-and-deploy:
+    # Use the latest version of Ubuntu as the runner
+    runs-on: ubuntu-latest
+
+    # The sequence of steps to run in this job
+    steps:
+      # 1. Check out your repository code so the workflow can access it
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # 2. Set up the correct version of Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Use a modern version of Node.js
+
+      # 3. Install the project's JavaScript dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # 4. Build the React app for production. This creates the 'dist' folder.
+      - name: Build Project
+        run: npm run build
+
+      # 5. Copy the built files from the 'dist' folder to your server
+      - name: Deploy to Server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "dist/*" # <-- This is the potential problem
+          target: "/var/www/qr114-website"
