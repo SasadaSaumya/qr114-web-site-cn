@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "app": "Uygulama",
+    "product": "Ürün",
+    "assembly": "Montaj",
+    "buy": "Satın Al",
+    "support": "Destek"
+  },
+  "productTitle": "Quran Reciter QR114",
+  "productViews": {
+    "perspective": "Perspektif",
+    "front": "Ön",
+    "right": "Sağ",
+    "back": "Arka",
+    "left": "Sol",
+    "top": "Üst"
+  },
+  "specSection": {
+    "title": "Teknik Özellikler",
+    "text": "Söylemek istediklerinizi içeren gövde metni…"
+  },
+  "featureSection": {
+    "title": "Özellikler",
+    "text": "Söylemek istediklerinizi içeren gövde metni…"
+  },
+  "boxSection": {
+    "title": "Kutu İçeriği",
+    "item1": "QR114 Cihazı × 1",
+    "item2": "18650 2200 mAh × 2",
+    "item3": "Montaj Şablonu × 1",
+    "item4": "Temizleme Mendili × 2",
+    "item5": "3M Çift Taraflı Ped × 1",
+    "item6": "M12 Ankraj Civata × 2"
+  },
+  "appSection": {
+    "title": "Favori Mağazanızda QR114 Uygulamasını Bulun",
+    "ios": "iOS Uygulama Mağazası",
+    "google": "Google Play",
+    "huawei": "AppGallery",
+    "xiaomi": "Xiaomi Mağazası",
+    "apk": "APK İndir"
+  },
+  "assemblySection": {
+    "title": "Montaj",
+    "part1": "Cihaz",
+    "part2": "Açma/Kapama Düğmesi",
+    "part3": "2 × 18650 Pil",
+    "part4": "Pil Kapağı",
+    "part5": "Arka Kapak",
+    "gettingStartedTitle": "Başlarken",
+    "video1": "Uygulama Kurulum Videosu",
+    "video2": "Cihaz Montaj Videosu",
+    "video3": "Cihaz Kurulum Videosu"
+  },
+  "buySection": {
+    "promotion": "Promosyon",
+    "price": "$50.00",
+    "includes": {
+      "item1": "QR114 Cihazı",
+      "item2": "Kontrol Uygulaması",
+      "item3": "2 × 18650 2200 mAh Pil",
+      "item4": "Ankraj Civata & Şablon",
+      "item5": "3M Çift Taraflı Ped & Temizlik Mendili"
+    },
+    "quantity": "Adet:",
+    "buyNow": "Şimdi Satın Al"
+  },
+  "faqSection": {
+    "title": "SSS",
+    "q1": "QR114 pil ömrü ne kadar sürer?",
+    "a1": "QR114, 24/7 kesintisiz kullanım için tasarlanmıştır…"
+  },
+  "privacyPolicy": {
+    "title": "Gizlilik Politikası",
+    "text": "QR114’e hoş geldiniz. Gizliliğiniz bizim için kritik öneme sahiptir…"
+  },
+  "scrollToTop": "Başa dön"
+}

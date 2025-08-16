@@ -1,0 +1,85 @@
+{
+  "nav": {
+    "home": "首页",
+    "app": "应用",
+    "product": "产品",
+    "assembly": "组装",
+    "buy": "购买",
+    "support": "支持"
+  },
+  "productTitle": "Quran Reciter QR114",
+  "productViews": {
+    "perspective": "透视图",
+    "front": "正面",
+    "right": "右侧",
+    "back": "背面",
+    "left": "左侧",
+    "top": "顶部"
+  },
+  "specSection": {
+    "title": "规格",
+    "text": "您希望展示的主体文本。添加主要要点、引用、轶事，甚至一个非常简短的故事…"
+  },
+  "featureSection": {
+    "title": "功能",
+    "text": "您希望展示的主体文本。添加主要要点、引用、轶事，甚至一个非常简短的故事…"
+  },
+  "boxSection": {
+    "title": "包装内含",
+    "item1": "QR114 设备 × 1",
+    "item2": "18650 2200 mAh × 2",
+    "item3": "定位模板 × 1",
+    "item4": "清洁湿巾 × 2",
+    "item5": "3M 双面胶垫 × 1",
+    "item6": "M12 锚栓 × 2"
+  },
+  "appSection": {
+    "title": "在您喜爱的商店中查找 QR114 应用",
+    "ios": "iOS 应用商店",
+    "google": "Google Play",
+    "huawei": "AppGallery",
+    "xiaomi": "Xiaomi 商店",
+    "apk": "APK 下载"
+  },
+  "assemblySection": {
+    "title": "安装流程",
+    "part1": "设备",
+    "part2": "开/关 开关",
+    "part3": "2 × 18650 电池",
+    "part4": "电池盖",
+    "part5": "后盖",
+    "gettingStartedTitle": "快速上手",
+    "video1": "应用安装视频",
+    "video2": "设备组装视频",
+    "video3": "设备安装视频"
+  },
+  "buySection": {
+    "promotion": "限时促销",
+    "price": "$50.00",
+    "includes": {
+      "item1": "QR114 设备",
+      "item2": "控制应用",
+      "item3": "2 × 18650 2200 mAh 电池",
+      "item4": "锚栓 & 定位模板",
+      "item5": "3M 双面胶垫 & 清洁湿巾"
+    },
+    "quantity": "数量：",
+    "buyNow": "立即购买"
+  },
+  "faqSection": {
+    "title": "常见问题",
+    "q1": "QR114 的电池续航时间是多少？",
+    "a1": "QR114 设计为 24/7 不间断运行，配有两节高容量 18650 电池，并可连接电源持续播放。",
+    "q2": "如何控制设备？",
+    "a2": "通过我们专用的移动应用（支持 iOS 和 Android）全面控制。使用 Bluetooth 5.3 连接，提供稳定且响应快速的体验。",
+    "q3": "设备预装了哪些内容？",
+    "a3": "设备内置 32 GB 存储空间，预装了来自多位知名诵经者的完整古兰经。您可以通过应用管理与选择诵经者。",
+    "q4": "安装过程复杂吗？",
+    "a4": "完全不。我们提供完整安装套件，包括定位模板、3M 胶垫、锚栓，并配有详细视频指南，指导安装全过程。"
+  },
+  "privacyPolicy": {
+    "title": "隐私政策",
+    "text": "欢迎使用 QR114。我们非常重视您的隐私…"
+  },
+  "scrollToTop": "滚动到顶部"
+}

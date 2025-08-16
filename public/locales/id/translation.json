@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "app": "Aplikasi",
+    "product": "Produk",
+    "assembly": "Perakitan",
+    "buy": "Beli",
+    "support": "Dukungan"
+  },
+  "productTitle": "Quran Reciter QR114",
+  "productViews": {
+    "perspective": "Perspektif",
+    "front": "Depan",
+    "right": "Kanan",
+    "back": "Belakang",
+    "left": "Kiri",
+    "top": "Atas"
+  },
+  "specSection": {
+    "title": "Spesifikasi",
+    "text": "Teks utama untuk apa pun yang ingin Anda sampaikan..."
+  },
+  "featureSection": {
+    "title": "Fitur",
+    "text": "Teks utama untuk apa pun yang ingin Anda sampaikan..."
+  },
+  "boxSection": {
+    "title": "Isi Kotak",
+    "item1": "Perangkat QR114 × 1",
+    "item2": "18650 2200 mAh × 2",
+    "item3": "Template Penambat × 1",
+    "item4": "Tisu Bersih × 2",
+    "item5": "Pad Double‑sided 3M × 1",
+    "item6": "Baut Anchor M12 × 2"
+  },
+  "appSection": {
+    "title": "Temukan Aplikasi QR114 di Toko Favorit Anda",
+    "ios": "iOS App Store",
+    "google": "Google Play",
+    "huawei": "AppGallery",
+    "xiaomi": "Toko Xiaomi",
+    "apk": "Unduhan APK"
+  },
+  "assemblySection": {
+    "title": "Perakitan",
+    "part1": "Perangkat",
+    "part2": "Saklar On/Off",
+    "part3": "2 × Baterai 18650",
+    "part4": "Penutup Baterai",
+    "part5": "Penutup Belakang",
+    "gettingStartedTitle": "Memulai",
+    "video1": "Video Instalasi Aplikasi",
+    "video2": "Video Perakitan Perangkat",
+    "video3": "Video Instalasi Perangkat"
+  },
+  "buySection": {
+    "promotion": "Promosi",
+    "price": "$50,00",
+    "includes": {
+      "item1": "Perangkat QR114",
+      "item2": "Aplikasi Kontrol",
+      "item3": "2 × Baterai 18650 2200 mAh",
+      "item4": "Baut Anchor & Template",
+      "item5": "Pad sisi ganda 3M & Tisu Bersih"
+    },
+    "quantity": "Qty:",
+    "buyNow": "Beli Sekarang"
+  },
+  "faqSection": {
+    "title": "FAQ",
+    "q1": "Berapa daya tahan baterai QR114?",
+    "a1": "QR114 dirancang untuk operasi nonstop 24/7..."
+  },
+  "privacyPolicy": {
+    "title": "Kebijakan Privasi",
+    "text": "Selamat datang di QR114..." 
+  },
+  "scrollToTop": "Gulir ke atas"
+}

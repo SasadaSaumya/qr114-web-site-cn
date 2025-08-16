@@ -3,7 +3,6 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Center } from '@react-three/drei';
 
 function Model(props) {
-  // CORRECTED PATH: Load the model from the public folder.
   const { scene } = useGLTF('/qr114.glb');
   return <primitive object={scene} {...props} />;
 }
@@ -15,8 +14,15 @@ const ModelViewer = () => {
         camera={{ position: [10, 7, 10], fov: 25 }}
       >
         <Suspense fallback={null}>
-          <hemisphereLight intensity={1} isObject3D={true} groundColor="black" />
-          <directionalLight position={[10, 10, 5]} intensity={2} />
+          <hemisphereLight intensity={1} isObject3D={true}  />
+          {/* [x: number, y: number, z: number] */}
+          <directionalLight position={[10, 10, 20]} intensity={0.5} />
+          <directionalLight position={[-10, 10, 20]} intensity={0.5} />
+          <directionalLight position={[0, -10, 20]} intensity={0.5} />
+          <directionalLight position={[0, 20, 0]} intensity={0.5} />
+        
+
+
           <Center>
             <Model scale={1} />
           </Center>
@@ -32,7 +38,6 @@ const ModelViewer = () => {
   );
 };
 
-// CORRECTED PATH: Preload from the public folder.
 useGLTF.preload('/qr114.glb');
 
 export default ModelViewer;

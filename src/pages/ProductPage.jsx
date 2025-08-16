@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-
-// Using a popular icon library.
+import React, { useState, useRef, useEffect, Suspense } from "react";
+import { useTranslation } from "react-i18next";
 import {
   FaApple,
   FaGooglePlay,
@@ -11,16 +10,34 @@ import {
   FaHeadset,
   FaArrowUp,
   FaVideo,
-  FaCheck,
 } from "react-icons/fa";
+// NEW ICONS IMPORTED
+import {
+  RiRestartFill,
+  RiBattery2ChargeFill,
+  RiSoundModuleFill,
+  RiWifiFill,
+  RiUserStarFill,
+} from "react-icons/ri";
+import {
+  BsShieldShaded,
+  BsCardChecklist,
+  BsMemory,
+  BsGlobe,
+  BsDroplet,
+} from "react-icons/bs";
+import { TbRulerMeasure, TbTruckDelivery } from "react-icons/tb";
+
 import { SiHuawei, SiXiaomi } from "react-icons/si";
 
-// --- COMPONENT & ASSET IMPORTS ---
+// --- CSS & COMPONENT IMPORTS ---
+import "../css/ProductPage.css";
 import ModelViewer from "../components/ModelViewer";
 import Footer from "../components/Footer";
-import VideoModal from "../components/VideoModal"; // <-- IMPORT THE NEW MODAL
+import VideoModal from "../components/VideoModal";
+import DistributorForm from "../components/DistributorForm";
 
-// This imports your local images correctly
+// --- ASSET IMPORTS ---
 import perspectiveImg from "../assets/Perspective.png";
 import frontImg from "../assets/Front.png";
 import rightImg from "../assets/Right.png";
@@ -28,53 +45,167 @@ import backImg from "../assets/Back.png";
 import leftImg from "../assets/Left.png";
 import topImg from "../assets/Top.png";
 import boxImg from "../assets/Box.png";
-import assemblyImg from "../assets/assmbly.png";
+import batteryReplacementDiagram from "../assets/assmbly.png";
 import batteryImg from "../assets/18650 2200 mAh x 2.png";
 import templateImg from "../assets/Template for anchoring x 1.png";
 import wipesImg from "../assets/Clean Wipes x 2.png";
 import padImg from "../assets/3M  Double side Pad x 1.png";
 import boltImg from "../assets/M12 Anchor Bolt x 2.png";
+import logoText from "../assets/qr114_test_logo.png";
+import apkIconImg from "../assets/apk.png";
+import logoImg from "../assets/logo.png";
+import appInstallVideo from "../assets/videos/Isntall_op1.mp4";
+import assemblyVideo from "../assets/videos/Assembly.mp4";
+import deviceInstallVideo from "../assets/videos/Install_oop2.mp4";
 
-// Using external links for these as they were in the original screenshot context
-const logoImg = "https://qr114.com/assets/logo-Cm2NHHDY.png";
-const apkIconImg = "https://cdn-icons-png.flaticon.com/512/8263/8263246.png";
+// --- DATA ---
+const videoGuides = [
+  { titleKey: "assemblySection.video1", url: appInstallVideo },
+  { titleKey: "assemblySection.video2", url: assemblyVideo },
+  { titleKey: "assemblySection.video3", url: deviceInstallVideo },
+];
+const productViews = {
+  Perspective: { key: "productViews.perspective", img: perspectiveImg },
+  Front: { key: "productViews.front", img: frontImg },
+  Right: { key: "productViews.right", img: rightImg },
+  Back: { key: "productViews.back", img: backImg },
+  Left: { key: "productViews.left", img: leftImg },
+  Top: { key: "productViews.top", img: topImg },
+};
+const appStores = [
+  { nameKey: "appSection.ios", icon: <FaApple size={32} /> },
+  { nameKey: "appSection.google", icon: <FaGooglePlay size={32} /> },
+  { nameKey: "appSection.huawei", icon: <SiHuawei size={32} /> },
+  { nameKey: "appSection.xiaomi", icon: <SiXiaomi size={32} /> },
+];
+const boxContents = [
+  { nameKey: "boxSection.item1", img: perspectiveImg },
+  { nameKey: "boxSection.item2", img: batteryImg },
+  { nameKey: "boxSection.item3", img: templateImg },
+  { nameKey: "boxSection.item4", img: wipesImg },
+  { nameKey: "boxSection.item5", img: padImg },
+  { nameKey: "boxSection.item6", img: boltImg },
+];
+const batteryParts = [
+  { num: 1, name: "Device" },
+  { num: 2, name: "On / Off Switch" },
+  { num: 3, name: "18650 Battery x 2" },
+  { num: 4, name: "Battery Cover" },
+  { num: 5, name: "Back Cover" },
+];
+const faqData = [
+  { questionKey: "faqSection.q1", answerKey: "faqSection.a1" },
+  { questionKey: "faqSection.q2", answerKey: "faqSection.a2" },
+  { questionKey: "faqSection.q3", answerKey: "faqSection.a3" },
+  { questionKey: "faqSection.q4", answerKey: "faqSection.a4" },
+];
 
-// --- Reusable Hooks & Components ---
-// (useIntersectionObserver, AnimatedSection, SectionTitle, FaqItem... keep them as they are)
+// DATA with ICONS for the new accordion
+const features = [
+  {
+    title: "Audio Excellence",
+    points: [
+      "Authentic Recitations: 6 certified Qaris",
+      "Sound: 3W HD speaker",
+      "Crystal-Clear Playback: Advanced noise reduction",
+    ],
+    icon: <RiSoundModuleFill />,
+  },
+  {
+    title: "Power & Durability",
+    points: [
+      "Solar Charging: 2-hour sun exposure = 12 hours playback",
+      "Backup Power: 4400mAh Li-ion battery (72 hours continuous use)",
+      "Weather Resistance: IPX5 certified (rain/sand/dust proof)",
+      "Military-Grade Shell: Shock-absorbent ABS polymer",
+    ],
+    icon: <RiBattery2ChargeFill />,
+  },
+  {
+    title: "Smart Connectivity",
+    points: [
+      "Bluetooth 5.3: Seamless pairing (30m range)",
+      "App Control: Select verses, reciters, and adjust volume",
+    ],
+    icon: <RiWifiFill />,
+  },
+  {
+    title: "User Experience",
+    points: [
+      "Intuitive Interface: Via App",
+      "Portable Design: 435g weight, 165x200x48mm",
+      "Lifetime Updates: Free firmware upgrades",
+    ],
+    icon: <RiUserStarFill />,
+  },
+];
+const specifications = [
+  {
+    title: "Compliance",
+    points: ["SASO SIRC, CITC, PIPL, RoHS, Halal Certified"],
+    icon: <BsCardChecklist />,
+  },
+  { title: "Memory", points: ["32GB internal"], icon: <BsMemory /> },
+  {
+    title: "Connectivity",
+    points: ["Bluetooth 5.3 @ 1 MBPS"],
+    icon: <RiWifiFill />,
+  },
+  {
+    title: "Languages",
+    points: ["English, Arabic, Chinese, Turkish, Bahasa Malay, Indonesia"],
+    icon: <BsGlobe />,
+  },
+  {
+    title: "Solar System",
+    points: ["Built-In 6V / 5W"],
+    icon: <BsShieldShaded />,
+  },
+  {
+    title: "Waterproofing",
+    points: ["IPX5 (Rain/dust proof)"],
+    icon: <BsDroplet />,
+  },
+  {
+    title: "Dimensions & Weight",
+    points: [
+      "Device: 165x200x48 mm",
+      "Packing: 210x240x68 mm",
+      "Net Weight: 435g +/- 1%",
+      "Gross Weight: 650g +/- 1%",
+    ],
+    icon: <TbRulerMeasure />,
+  },
+  {
+    title: "Shipping",
+    points: ["Master Carton: 10 Sets"],
+    icon: <TbTruckDelivery />,
+  },
+];
+
+// --- REUSABLE & SECTIONAL COMPONENTS ---
+
 const useIntersectionObserver = (options) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
-
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-        observer.disconnect();
-      }
+      if (entry.isIntersecting) setIsVisible(true);
     }, options);
-
     const currentRef = ref.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
+    if (currentRef) observer.observe(currentRef);
+    return () => currentRef && observer.unobserve(currentRef);
   }, [options]);
-
   return [ref, isVisible];
 };
 
-const AnimatedSection = ({ children, className = "", style = {} }) => {
+const AnimatedSection = ({ children, className = "", id = "" }) => {
   const [ref, isVisible] = useIntersectionObserver({ threshold: 0.1 });
   return (
     <section
       ref={ref}
+      id={id}
       className={`section-container ${className} ${isVisible ? "visible" : ""}`}
-      style={style}
     >
       {children}
     </section>
@@ -85,151 +216,798 @@ const SectionTitle = ({ children }) => (
   <h2 className="section-title">{children}</h2>
 );
 
-const FaqItem = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const LanguageSwitcher = () => {
+  const { i18n } = useTranslation();
+  const languages = [
+    { code: "en", name: "English" },
+    { code: "zh", name: "中文" },
+  ];
+  return (
+    <div className="language-switcher">
+      <select
+        value={i18n.language}
+        onChange={(e) => i18n.changeLanguage(e.target.value)}
+        className="language-switcher-select"
+      >
+        {languages.map((lang) => (
+          <option key={lang.code} value={lang.code}>
+            {lang.name}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+const HeroSection = ({ navLinks, scrollToSection }) => {
+  const { t } = useTranslation();
+  return (
+    <header className="hero-section">
+      <div className="hero-green-panel">
+        <div className="hero-mobile-header" style={{backgroundColor: "#ffffff", width: "130px", padding: "10px", borderRadius: "10px"}}>
+          <img src={logoImg} alt="QR114 Logo"  className="hero-mobile-logo" />
+          <img
+            src={logoText}
+            alt="QR114 Text Logo"
+            className="hero-mobile-logo-text"
+            style={{ width: "100px", height: "auto" }}
+          />
+        </div>
+      </div>
+      <div className="hero-center-logo">
+        <img src={logoImg} alt="QR114 Product Logo" />
+        <img src={logoText} alt="QR114 Text Logo" />
+      </div>
+      <div className="hero-gray-panel">
+        <ul className="hero-nav">
+          {navLinks.map((link) => (
+            <li key={link.textKey} className="nav-item">
+              <a
+                href={`#${link.id}`}
+                onClick={(e) => {
+                  if (link.ref) {
+                    e.preventDefault();
+                    scrollToSection(link.ref);
+                  }
+                }}
+              >
+                {t(link.textKey)} {link.icon}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </header>
+  );
+};
+
+const ProductViewer = ({ activeView, setActiveView }) => {
+  const { t } = useTranslation();
+  return (
+    <AnimatedSection className="product-viewer-section">
+      <SectionTitle>{t("productTitle")}</SectionTitle>
+      <div className="product-viewer-container">
+        {activeView === "3D" ? (
+          <ModelViewer />
+        ) : (
+          <img
+            key={activeView}
+            src={productViews[activeView].img}
+            alt={`${t("productTitle")} - ${t(
+              productViews[activeView].key
+            )} view`}
+            className="product-image-main"
+          />
+        )}
+      </div>
+      <div className="view-selector-grid">
+        {Object.keys(productViews).map((view) => (
+          <div
+            key={view}
+            onClick={() => setActiveView(view)}
+            className={`view-selector ${activeView === view ? "active" : ""}`}
+          >
+            <img src={productViews[view].img} alt={t(productViews[view].key)} />
+            <p>{t(productViews[view].key)}</p>
+          </div>
+        ))}
+        <div
+          onClick={() => setActiveView("3D")}
+          className={`view-selector ${activeView === "3D" ? "active" : ""}`}
+        >
+          <img src={perspectiveImg} alt="3D View" />
+          <p>3D</p>
+        </div>
+      </div>
+    </AnimatedSection>
+  );
+};
+
+// ================================================================
+// === NEW & IMPROVED FEATURE/SPEC ACCORDION SECTION ===
+// ================================================================
+
+const SpecAccordionItem = ({
+  categoryTitle,
+  points,
+  icon,
+  startOpen = false,
+}) => {
+  const [isOpen, setIsOpen] = useState(startOpen);
   const contentRef = useRef(null);
 
+  const renderDetailList = (items) => (
+    <ul>
+      {items.map((point, index) => (
+        <li key={index}>{point}</li>
+      ))}
+    </ul>
+  );
+
   return (
-    <div className="faq-item">
+    <div className="spec-accordion-item">
       <button
-        className="faq-question"
+        className="spec-accordion-header"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
       >
-        <span>{question}</span>
-        <span className={`faq-icon ${isOpen ? "open" : ""}`}></span>
+        <span className="spec-accordion-icon-title">
+          <span className="spec-icon">{icon}</span>
+          <h4 className="spec-accordion-title">{categoryTitle}</h4>
+        </span>
+        <span
+          className={`spec-accordion-plus-icon ${isOpen ? "open" : ""}`}
+        ></span>
       </button>
       <div
         ref={contentRef}
-        className="faq-answer-wrapper"
+        className="spec-accordion-content-wrapper"
         style={{
           maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : "0px",
         }}
       >
-        <div className="faq-answer">
-          <p>{answer}</p>
-        </div>
+        <div className="spec-accordion-content">{renderDetailList(points)}</div>
       </div>
     </div>
   );
 };
 
-// --- Main Product Page Component ---
+const FeatureSpecSection = () => {
+  const { t } = useTranslation();
+  return (
+    <AnimatedSection className="feature-spec-grid-section">
+      <div className="feature-spec-grid">
+        <div className="feature-spec-item">
+          <h3>{t("featureSection.title")}</h3>
+          <div className="spec-accordion">
+            {features.map((feature, index) => (
+              <SpecAccordionItem
+                key={feature.title}
+                categoryTitle={feature.title}
+                points={feature.points}
+                icon={feature.icon}
+                startOpen={index === 0} // Open the first item by default
+              />
+            ))}
+          </div>
+        </div>
+        <div className="feature-spec-item">
+          <h3>{t("specSection.title")}</h3>
+          <div className="spec-accordion">
+            {specifications.map((spec, index) => (
+              <SpecAccordionItem
+                key={spec.title}
+                categoryTitle={spec.title}
+                points={spec.points}
+                icon={spec.icon}
+                startOpen={index === 0} // Open the first item by default
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </AnimatedSection>
+  );
+};
+
+// ================================================================
+
+const AppSection = () => {
+  const { t } = useTranslation();
+  return (
+    <AnimatedSection>
+      <SectionTitle>{t("appSection.title")}</SectionTitle>
+      <div className="app-store-grid">
+        {appStores.map((store) => (
+          <div key={store.nameKey} className="app-store-item" onClick={() => window.open("https://play.google.com/store/apps/details?id=com.astrivix.qr114", "_blank")}>
+            <div className="app-store-icon">{store.icon}</div>
+            <p>{t(store.nameKey)}</p>
+          </div>
+        ))}
+      </div>
+    </AnimatedSection>
+  );
+};
+
+const BoxContentsSection = () => {
+  const { t } = useTranslation();
+  return (
+    <AnimatedSection>
+      <SectionTitle>{t("boxSection.title")}</SectionTitle>
+      <div className="box-image-wrapper">
+        <img src={boxImg} alt={t("boxSection.title")} className="box-image" />
+      </div>
+      <div className="box-contents-grid">
+        {boxContents.map((item) => (
+          <div key={item.nameKey} className="box-content-item">
+            <img src={item.img} alt={t(item.nameKey)} />
+            <p>{t(item.nameKey)}</p>
+          </div>
+        ))}
+      </div>
+    </AnimatedSection>
+  );
+};
+
+const AssemblySection = ({ openModal }) => {
+  const { t } = useTranslation();
+  return (
+    <AnimatedSection id="assembly">
+      <SectionTitle>Battery Replacement</SectionTitle>
+      <div className="battery-replacement-diagram">
+        <img
+          src={batteryReplacementDiagram}
+          alt="Battery Replacement Diagram"
+        />
+      </div>
+      <div className="battery-parts-legend">
+        {batteryParts.map((part) => (
+          <div key={part.num} className="battery-part-item">
+            <span className="battery-part-num">{part.num}</span>
+            <span className="battery-part-name">{part.name}</span>
+          </div>
+        ))}
+      </div>
+      <div className="video-guides">
+        <SectionTitle>{t("assemblySection.gettingStartedTitle")}</SectionTitle>
+        <div className="video-guides-grid">
+          {videoGuides.map((guide) => (
+            <button
+              key={guide.titleKey}
+              className="video-guide-btn"
+              onClick={() => {
+                openModal(guide)
+                console.log("Test");
+              }
+              }
+            >
+              <FaVideo /> {t(guide.titleKey)}
+            </button>
+          ))}
+        </div>
+      </div>
+    </AnimatedSection>
+  );
+};
+
+const DistributorSection = () => (
+  <AnimatedSection className="distributor-section" id="buy">
+    <SectionTitle>Want to become a Distributor</SectionTitle>
+    <div className="distributor-content">
+      <div className="distributor-image">
+        <img src={perspectiveImg} alt="QR114 Product" />
+      </div>
+      <div className="distributor-form-container">
+        <p className="contact-us-subtitle">Contact Us</p>
+        <DistributorForm />
+      </div>
+    </div>
+  </AnimatedSection>
+);
+
+const FaqSection = () => {
+  const { t } = useTranslation();
+  const FaqItem = ({ question, answer }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const contentRef = useRef(null);
+    return (
+      <div className="faq-item">
+        <button
+          className="faq-question"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+        >
+          <span>{question}</span>
+          <span className={`faq-icon ${isOpen ? "open" : ""}`}></span>
+        </button>
+        <div
+          ref={contentRef}
+          className="faq-answer-wrapper"
+          style={{
+            maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : "0px",
+          }}
+        >
+          <div className="faq-answer">
+            <p>{answer}</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  return (
+    <AnimatedSection>
+      <SectionTitle>{t("faqSection.title")}</SectionTitle>
+      <div className="faq-container">
+        {faqData.map((faq, index) => (
+          <FaqItem
+            key={index}
+            question={t(faq.questionKey)}
+            answer={t(faq.answerKey)}
+          />
+        ))}
+      </div>
+    </AnimatedSection>
+  );
+};
+
+const FinePrintSection = () => (
+  <div className="after-footer-section">
+    <div className="fine-print-content">
+      <p>
+            This Privacy Policy describes Our policies and procedures on the
+            collection, use and disclosure of Your information when You use the
+            Service and tells You about Your privacy rights and how the law
+            protects You.
+          </p>
+          <p>
+            We use Your Personal data to provide and improve the Service. By
+            using the Service, You agree to the collection and use of
+            information in accordance with this Privacy Policy. This Privacy
+            Policy has been created with the help of the Privacy Policy
+            Generator.
+          </p>
+
+          <h2>Interpretation and Definitions</h2>
+          <h3>Interpretation</h3>
+          <p>
+            The words of which the initial letter is capitalized have meanings
+            defined under the following conditions. The following definitions
+            shall have the same meaning regardless of whether they appear in
+            singular or in plural.
+          </p>
+
+          <h3>Definitions</h3>
+          <p>For the purposes of this Privacy Policy:</p>
+          <ul>
+            <li>
+              <strong>Account</strong> means a unique account created for You to
+              access our Service or parts of our Service.
+            </li>
+            <li>
+              <strong>Affiliate</strong> means an entity that controls, is
+              controlled by or is under common control with a party, where
+              "control" means ownership of 50% or more of the shares, equity
+              interest or other securities entitled to vote for election of
+              directors or other managing authority.
+            </li>
+            <li>
+              <strong>Application</strong> refers to QR114, the software program
+              provided by the Company.
+            </li>
+            <li>
+              <strong>Company</strong> (referred to as either "the Company",
+              "We", "Us" or "Our" in this Agreement) refers to RAOSS HK COMPANY
+              LIMITED, UNIT B, ON 9/F, THOMSON COMMERCIAL BUILDING, NO. 8,
+              THOMSON ROAD, WAN CHAI, HONG KONG.
+            </li>
+            <li>
+              <strong>Country</strong> refers to: China
+            </li>
+            <li>
+              <strong>Device</strong> means any device that can access the
+              Service such as a computer, a cellphone or a digital tablet.
+            </li>
+            <li>
+              <strong>Personal Data</strong> is any information that relates to
+              an identified or identifiable individual.
+            </li>
+            <li>
+              <strong>Service</strong> refers to the Application.
+            </li>
+            <li>
+              <strong>Service Provider</strong> means any natural or legal
+              person who processes the data on behalf of the Company. It refers
+              to third-party companies or individuals employed by the Company to
+              facilitate the Service, to provide the Service on behalf of the
+              Company, to perform services related to the Service or to assist
+              the Company in analyzing how the Service is used.
+            </li>
+            <li>
+              <strong>Usage Data</strong> refers to data collected
+              automatically, either generated by the use of the Service or from
+              the Service infrastructure itself (for example, the duration of a
+              page visit).
+            </li>
+            <li>
+              <strong>You</strong> means the individual accessing or using the
+              Service, or the company, or other legal entity on behalf of which
+              such individual is accessing or using the Service, as applicable.
+            </li>
+          </ul>
+
+          <h2>Collecting and Using Your Personal Data</h2>
+          <h3>Types of Data Collected</h3>
+          <h4>Personal Data</h4>
+          <p>
+            While using Our Service, We may ask You to provide Us with certain
+            personally identifiable information that can be used to contact or
+            identify You. Personally identifiable information may include, but
+            is not limited to:
+          </p>
+          <ul>
+            <li>Email address</li>
+            <li>Usage Data</li>
+          </ul>
+
+          <h4>Usage Data</h4>
+          <p>Usage Data is collected automatically when using the Service.</p>
+          <p>
+            Usage Data may include information such as Your Device's Internet
+            Protocol address (e.g. IP address), browser type, browser version,
+            the pages of our Service that You visit, the time and date of Your
+            visit, the time spent on those pages, unique device identifiers and
+            other diagnostic data.
+          </p>
+          <p>
+            When You access the Service by or through a mobile device, We may
+            collect certain information automatically, including, but not
+            limited to, the type of mobile device You use, Your mobile device
+            unique ID, the IP address of Your mobile device, Your mobile
+            operating system, the type of mobile Internet browser You use,
+            unique device identifiers and other diagnostic data.
+          </p>
+          <p>
+            We may also collect information that Your browser sends whenever You
+            visit our Service or when You access the Service by or through a
+            mobile device.
+          </p>
+
+          <h3>Information Collected while Using the Application</h3>
+          <p>
+            While using Our Application, in order to provide features of Our
+            Application, We may collect, with Your prior permission:
+          </p>
+          <ul>
+            <li>Information regarding your location</li>
+          </ul>
+          <p>
+            We use this information to provide features of Our Service, to
+            improve and customize Our Service. The information may be uploaded
+            to the Company's servers and/or a Service Provider's server or it
+            may be simply stored on Your device.
+          </p>
+          <p>
+            You can enable or disable access to this information at any time,
+            through Your Device settings.
+          </p>
+
+          <h2>Use of Your Personal Data</h2>
+          <p>The Company may use Personal Data for the following purposes:</p>
+          <ul>
+            <li>
+              <strong>To provide and maintain our Service</strong>, including to
+              monitor the usage of our Service.
+            </li>
+            <li>
+              <strong>To manage Your Account:</strong> to manage Your
+              registration as a user of the Service. The Personal Data You
+              provide can give You access to different functionalities of the
+              Service that are available to You as a registered user.
+            </li>
+            <li>
+              <strong>For the performance of a contract:</strong> the
+              development, compliance and undertaking of the purchase contract
+              for the products, items or services You have purchased or of any
+              other contract with Us through the Service.
+            </li>
+            <li>
+              <strong>To contact You:</strong> To contact You by email,
+              telephone calls, SMS, or other equivalent forms of electronic
+              communication, such as a mobile application's push notifications
+              regarding updates or informative communications related to the
+              functionalities, products or contracted services, including the
+              security updates, when necessary or reasonable for their
+              implementation.
+            </li>
+            <li>
+              <strong>To provide You</strong> with news, special offers and
+              general information about other goods, services and events which
+              we offer that are similar to those that you have already purchased
+              or enquired about unless You have opted not to receive such
+              information.
+            </li>
+            <li>
+              <strong>To manage Your requests:</strong> To attend and manage
+              Your requests to Us.
+            </li>
+            <li>
+              <strong>For business transfers:</strong> We may use Your
+              information to evaluate or conduct a merger, divestiture,
+              restructuring, reorganization, dissolution, or other sale or
+              transfer of some or all of Our assets, whether as a going concern
+              or as part of bankruptcy, liquidation, or similar proceeding, in
+              which Personal Data held by Us about our Service users is among
+              the assets transferred.
+            </li>
+            <li>
+              <strong>For other purposes:</strong> We may use Your information
+              for other purposes, such as data analysis, identifying usage
+              trends, determining the effectiveness of our promotional campaigns
+              and to evaluate and improve our Service, products, services,
+              marketing and your experience.
+            </li>
+          </ul>
+
+          <p>
+            We may share Your personal information in the following situations:
+          </p>
+          <ul>
+            <li>
+              <strong>With Service Providers:</strong> We may share Your
+              personal information with Service Providers to monitor and analyze
+              the use of our Service, to contact You.
+            </li>
+            <li>
+              <strong>For business transfers:</strong> We may share or transfer
+              Your personal information in connection with, or during
+              negotiations of, any merger, sale of Company assets, financing, or
+              acquisition of all or a portion of Our business to another
+              company.
+            </li>
+            <li>
+              <strong>With Affiliates:</strong> We may share Your information
+              with Our affiliates, in which case we will require those
+              affiliates to honor this Privacy Policy. Affiliates include Our
+              parent company and any other subsidiaries, joint venture partners
+              or other companies that We control or that are under common
+              control with Us.
+            </li>
+            <li>
+              <strong>With business partners:</strong> We may share Your
+              information with Our business partners to offer You certain
+              products, services or promotions.
+            </li>
+            <li>
+              <strong>With other users:</strong> when You share personal
+              information or otherwise interact in the public areas with other
+              users, such information may be viewed by all users and may be
+              publicly distributed outside.
+            </li>
+            <li>
+              <strong>With Your consent:</strong> We may disclose Your personal
+              information for any other purpose with Your consent.
+            </li>
+          </ul>
+
+          <h2>Retention of Your Personal Data</h2>
+          <p>
+            The Company will retain Your Personal Data only for as long as is
+            necessary for the purposes set out in this Privacy Policy. We will
+            retain and use Your Personal Data to the extent necessary to comply
+            with our legal obligations (for example, if we are required to
+            retain your data to comply with applicable laws), resolve disputes,
+            and enforce our legal agreements and policies.
+          </p>
+          <p>
+            The Company will also retain Usage Data for internal analysis
+            purposes. Usage Data is generally retained for a shorter period of
+            time, except when this data is used to strengthen the security or to
+            improve the functionality of Our Service, or We are legally
+            obligated to retain this data for longer time periods.
+          </p>
+
+          <h2>Transfer of Your Personal Data</h2>
+          <p>
+            Your information, including Personal Data, is processed at the
+            Company's operating offices and in any other places where the
+            parties involved in the processing are located. It means that this
+            information may be transferred to — and maintained on — computers
+            located outside of Your state, province, country or other
+            governmental jurisdiction where the data protection laws may differ
+            than those from Your jurisdiction.
+          </p>
+          <p>
+            Your consent to this Privacy Policy followed by Your submission of
+            such information represents Your agreement to that transfer.
+          </p>
+          <p>
+            The Company will take all steps reasonably necessary to ensure that
+            Your data is treated securely and in accordance with this Privacy
+            Policy and no transfer of Your Personal Data will take place to an
+            organization or a country unless there are adequate controls in
+            place including the security of Your data and other personal
+            information.
+          </p>
+
+          <h2>Delete Your Personal Data</h2>
+          <p>
+            You have the right to delete or request that We assist in deleting
+            the Personal Data that We have collected about You.
+          </p>
+          <p>
+            Our Service may give You the ability to delete certain information
+            about You from within the Service.
+          </p>
+          <p>
+            You may update, amend, or delete Your information at any time by
+            signing in to Your Account, if you have one, and visiting the
+            account settings section that allows you to manage Your personal
+            information. You may also contact Us to request access to, correct,
+            or delete any personal information that You have provided to Us.
+          </p>
+          <p>
+            Please note, however, that We may need to retain certain information
+            when we have a legal obligation or lawful basis to do so.
+          </p>
+
+          <h2>Disclosure of Your Personal Data</h2>
+          <h3>Business Transactions</h3>
+          <p>
+            If the Company is involved in a merger, acquisition or asset sale,
+            Your Personal Data may be transferred. We will provide notice before
+            Your Personal Data is transferred and becomes subject to a different
+            Privacy Policy.
+          </p>
+          <h3>Law enforcement</h3>
+          <p>
+            Under certain circumstances, the Company may be required to disclose
+            Your Personal Data if required to do so by law or in response to
+            valid requests by public authorities (e.g. a court or a government
+            agency).
+          </p>
+          <h3>Other legal requirements</h3>
+          <p>
+            The Company may disclose Your Personal Data in the good faith belief
+            that such action is necessary to:
+          </p>
+          <ul>
+            <li>Comply with a legal obligation</li>
+            <li>Protect and defend the rights or property of the Company</li>
+            <li>
+              Prevent or investigate possible wrongdoing in connection with the
+              Service
+            </li>
+            <li>
+              Protect the personal safety of Users of the Service or the public
+            </li>
+            <li>Protect against legal liability</li>
+          </ul>
+
+          <h2>Security of Your Personal Data</h2>
+          <p>
+            The security of Your Personal Data is important to Us, but remember
+            that no method of transmission over the Internet, or method of
+            electronic storage is 100% secure. While We strive to use
+            commercially acceptable means to protect Your Personal Data, We
+            cannot guarantee its absolute security.
+          </p>
+
+          <h2>Children's Privacy</h2>
+          <p>
+            Our Service does not address anyone under the age of 13. We do not
+            knowingly collect personally identifiable information from anyone
+            under the age of 13. If You are a parent or guardian and You are
+            aware that Your child has provided Us with Personal Data, please
+            contact Us. If We become aware that We have collected Personal Data
+            from anyone under the age of 13 without verification of parental
+            consent, We take steps to remove that information from Our servers.
+          </p>
+          <p>
+            If We need to rely on consent as a legal basis for processing Your
+            information and Your country requires consent from a parent, We may
+            require Your parent's consent before We collect and use that
+            information.
+          </p>
+
+          <h2>Links to Other Websites</h2>
+          <p>
+            Our Service may contain links to other websites that are not
+            operated by Us. If You click on a third party link, You will be
+            directed to that third party's site. We strongly advise You to
+            review the Privacy Policy of every site you visit.
+          </p>
+          <p>
+            We have no control over and assume no responsibility for the
+            content, privacy policies or practices of any third party sites or
+            services.
+          </p>
+
+          <h2>Changes to this Privacy Policy</h2>
+          <p>
+            We may update Our Privacy Policy from time to time. We will notify
+            You of any changes by posting the new Privacy Policy on this page.
+          </p>
+          <p>
+            We will let You know via email and/or a prominent notice on Our
+            Service, prior to the change becoming effective and update the "Last
+            updated" date at the top of this Privacy Policy.
+          </p>
+          <p>
+            You are advised to review this Privacy Policy periodically for any
+            changes. Changes to this Privacy Policy are effective when they are
+            posted on this page.
+          </p>
+
+          <h2>Contact Us</h2>
+          <p>
+            If you have any questions about this Privacy Policy, You can contact
+            us:
+          </p>
+          <ul>
+            <li>
+              By email: <a href="mailto:admin@raoss.com">admin@raoss.com</a>
+            </li>
+            <li>
+              By visiting this page on our website:{" "}
+              <a
+                href="https://qr114.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://qr114.com/
+              </a>
+            </li>
+          </ul>
+    </div>
+  </div>
+);
+
+// --- MAIN PAGE COMPONENT ---
 function ProductPage() {
-  const [activeView, setActiveView] = useState("3D");
+  const { t, i18n } = useTranslation();
+  const [activeView, setActiveView] = useState("Perspective");
   const [isScrolled, setIsScrolled] = useState(false);
-  const [quantity, setQuantity] = useState(1);
   const [modalVideo, setModalVideo] = useState({
     isOpen: false,
     url: "",
     title: "",
-  }); // <-- NEW STATE FOR MODAL
+  });
 
-  // --- Refs for smooth scrolling ---
   const topRef = useRef(null);
   const appRef = useRef(null);
   const productRef = useRef(null);
-  const buyRef = useRef(null);
   const supportRef = useRef(null);
+  const assemblyRef = useRef(null);
 
-  // --- Data for sections ---
-  const videoGuides = [
-    {
-      title: "App Installation Video",
-      url: "https://www.sample-videos.com/video321/mp4/240/big_buck_bunny_240p_30mb.mp4",
-    },
-    {
-      title: "Device Assembly Video",
-      url: "https://www.sample-videos.com/video321/mp4/240/big_buck_bunny_240p_10mb.mp4",
-    },
-    {
-      title: "Device Installation Video",
-      url: "https://www.sample-videos.com/video321/mp4/240/big_buck_bunny_240p_10mb.mp4",
-    },
-  ];
-  // (All other data arrays: productViews, orderIncludes, appStores, etc. remain the same)
-  const productViews = {
-    Perspective: perspectiveImg,
-    Front: frontImg,
-    Right: rightImg,
-    Back: backImg,
-    Left: leftImg,
-    Top: topImg,
-  };
-  const orderIncludes = [
-    "QR114 Device",
-    "Control APP",
-    "18650 2200 mAh x 2 Batteries",
-    "Anchor Bolt & Template",
-    "3M Double side Pad and Clean Wips",
-  ];
-  const appStores = [
-    { name: "iOS App Store", icon: <FaApple size={32} /> },
-    { name: "Google Play", icon: <FaGooglePlay size={32} /> },
-    { name: "AppGallery", icon: <SiHuawei size={32} /> },
-    { name: "Xiaomi Store", icon: <SiXiaomi size={32} /> },
-    {
-      name: "APK Download",
-      icon: <img src={apkIconImg} alt="APK" className="apk-icon" />,
-    },
-  ];
-  const boxContents = [
-    { name: "QR114 Device x 1", img: perspectiveImg },
-    { name: "18650 2200 mAh x 2", img: batteryImg },
-    { name: "Anchoring Template x 1", img: templateImg },
-    { name: "Clean Wipes x 2", img: wipesImg },
-    { name: "3M Double-sided Pad x 1", img: padImg },
-    { name: "M12 Anchor Bolt x 2", img: boltImg },
-  ];
-  const assemblyParts = [
-    { num: 1, name: "Device" },
-    { num: 2, name: "On / Off Switch" },
-    { num: 3, name: "18650 Battery x 2" },
-    { num: 4, name: "Battery Cover" },
-    { num: 5, name: "Back Cover" },
-  ];
-  const faqData = [
-    {
-      question: "What is the battery life of the QR114?",
-      answer:
-        "The QR114 is designed for 24/7 non-stop operation. It comes with two high-capacity 18650 batteries and can be mains powered for continuous recitation.",
-    },
-    {
-      question: "How do I control the device?",
-      answer:
-        "The device is fully controlled via our dedicated mobile app, available for iOS and Android. It connects using Bluetooth 5.3 for a stable and responsive experience.",
-    },
-    {
-      question: "What content is pre-loaded on the device?",
-      answer:
-        "The device comes with 32GB of internal storage, pre-loaded with a wide selection of complete Quran recitations from various renowned Qaris. You can manage and select reciters through the app.",
-    },
-    {
-      question: "Is the installation process difficult?",
-      answer:
-        "Not at all. We provide a complete mounting kit, including an anchoring template, 3M adhesive pad, and anchor bolts, to suit different wall types. We also have detailed video guides to walk you through the process.",
-    },
-  ];
   const navLinks = [
-    { text: "Home", icon: <FaHome />, ref: topRef },
-    { text: "APP", icon: <FaMobileAlt />, ref: appRef },
-    { text: "Product", icon: <FaBoxOpen />, ref: productRef },
-    { text: "Buy", icon: <FaShoppingCart />, ref: buyRef },
-    { text: "Support", icon: <FaHeadset />, ref: supportRef },
+    { textKey: "nav.home", icon: <FaHome />, ref: topRef, id: "home" },
+    {
+      textKey: "nav.product",
+      icon: <FaBoxOpen />,
+      ref: productRef,
+      id: "product",
+    },
+    { textKey: "nav.app", icon: <FaMobileAlt />, ref: appRef, id: "app" },
+    {
+      textKey: "Getting Started",
+      icon: <RiRestartFill />,
+      ref: assemblyRef,
+      id: "assembly",
+    },
+    { textKey: "Distributor", icon: <FaShoppingCart />, ref: null, id: "buy" },
+    { textKey: "FAQ", icon: <FaHeadset />, ref: supportRef, id: "support" },
   ];
 
-  // --- HANDLERS FOR MODAL ---
+  useEffect(() => {
+    document.body.dir = i18n.dir();
+  }, [i18n, i18n.language]);
+
   const openModal = (video) => {
-    setModalVideo({ isOpen: true, url: video.url, title: video.title });
+    setModalVideo({ isOpen: true, url: video.url, title: t(video.titleKey) });
   };
-
-  const closeModal = () => {
-    setModalVideo({ isOpen: false, url: "", title: "" });
-  };
-
-  const scrollToSection = (ref) => {
+  const closeModal = () => setModalVideo({ isOpen: false, url: "", title: "" });
+  const scrollToSection = (ref) =>
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 100);
@@ -237,333 +1015,53 @@ function ProductPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const globalStyles = `
-    /* (All your existing globalStyles CSS remains here...) */
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-    :root { --primary-green: #009933; --dark-green: #007A29; --light-gray: #f0f0f0; --off-white: #f9f9f9; --text-dark: #2c3e50; --text-light: #555; --border-color: #e0e0e0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Poppins', sans-serif; color: var(--text-light); background-color: #ffffff; margin: 0; overflow-x: hidden; }
-    .section-container { padding: 80px 20px; max-width: 1200px; margin: 0 auto; opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-    .section-container.visible { opacity: 1; transform: translateY(0); }
-    .section-title { font-size: 2.8rem; text-align: center; margin-bottom: 60px; color: var(--text-dark); font-weight: 700; position: relative; }
-    .section-title::after { content: ''; display: block; width: 80px; height: 4px; background-color: var(--primary-green); margin: 15px auto 0; border-radius: 2px; }
-    .hero-section { height: 100vh; min-height: 700px; position: relative; display: flex; background-color: var(--light-gray); margin: 20px; border-radius: 24px; overflow: hidden; }
-    .hero-green-panel { width: 50%; background: var(--primary-green); display: flex; justify-content: center; align-items: center; }
-    .hero-title-wrapper { text-align: center; color: white; transform: translateX(25%);}
-    .hero-title { font-size: 8rem; font-weight: 800; margin: 0; line-height: 1; }
-    .hero-gray-panel { width: 50%; position: relative; }
-    .hero-center-logo { position: absolute; width: 100px; height: 100px; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; background: #fff; padding: 15px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center; }
-    .hero-center-logo img { width: 100%; height: 100%; object-fit: contain; }
-    .hero-nav { position: absolute; bottom: 40px; right: 60px; list-style: none; padding: 0; text-align: right; }
-    .nav-item { color: var(--text-dark); display: flex; align-items: center; justify-content: flex-end; margin-bottom: 20px; font-size: 1.1rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
-    .nav-item:hover { color: var(--primary-green); transform: translateX(-10px); }
-    .nav-item svg { margin-left: 15px; transition: transform 0.3s ease; }
-    .nav-item:hover svg { transform: scale(1.2); }
-    .product-viewer-container { min-height: 450px; display: flex; justify-content: center; align-items: center; margin-bottom: 40px; }
-    .product-image-main { max-width: 100%; height: auto; max-height: 450px; transition: opacity 0.4s; animation: fadeIn 0.5s; }
-    .view-selector-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-    .view-selector { border: 2px solid var(--border-color); padding: 8px; border-radius: 12px; cursor: pointer; transition: all 0.3s; background-color: white; text-align: center; }
-    .view-selector:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
-    .view-selector.active { border-color: var(--primary-green); box-shadow: 0 5px 20px rgba(0, 153, 51, 0.25); }
-    .view-selector img { width: 80px; height: 80px; object-fit: contain; display: block; }
-    .view-selector p { margin: 8px 0 0; font-size: 0.8rem; color: var(--text-dark); font-weight: 500; }
-    .app-store-grid { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; }
-    .app-store-item { display: flex; flex-direction: column; align-items: center; gap: 15px; padding: 20px; min-width: 120px; transition: transform 0.3s ease; cursor: pointer; }
-    .app-store-item:hover { transform: translateY(-10px); }
-    .app-store-icon { color: var(--text-dark); }
-    .apk-icon { width: 32px; height: 32px; }
-    .app-store-item p { margin: 0; font-size: 0.9rem; text-align: center; color: var(--text-dark); }
-    .feature-spec-grid { display: flex; gap: 60px; flex-wrap: wrap; }
-    .feature-spec-item { flex: 1; min-width: 300px; }
-    .feature-spec-item h3 { font-size: 1.8rem; padding-bottom: 10px; margin-bottom: 20px; color: var(--text-dark); border-bottom: 3px solid var(--primary-green); display: inline-block;}
-    .feature-spec-item p { line-height: 1.8; }
-    .box-image-wrapper { display: flex; justify-content: center; margin-bottom: 60px; }
-    .box-image { max-width: min(500px, 90%); transition: transform 0.3s ease; }
-    .box-image:hover { transform: scale(1.05); }
-    .box-contents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 40px; text-align: center; }
-    .box-content-item img { height: 80px; margin-bottom: 15px; object-fit: contain; transition: transform 0.3s; }
-    .box-content-item:hover img { transform: scale(1.1); }
-    .box-content-item p { margin: 0; font-size: 0.9rem; font-weight: 500; color: var(--text-dark); }
-    .assembly-grid { display: flex; align-items: center; gap: 60px; flex-wrap: wrap-reverse; }
-    .assembly-diagram { flex: 1.5; text-align: center; min-width: 300px; }
-    .assembly-diagram img { max-width: 100%; }
-    .assembly-parts { flex: 1; min-width: 280px; }
-    .assembly-part-item { display: flex; align-items: center; margin-bottom: 25px; }
-    .assembly-part-num { width: 40px; height: 40px; min-width: 40px; border-radius: 50%; background-color: var(--text-dark); color: white; display: inline-flex; justify-content: center; align-items: center; margin-right: 20px; font-weight: bold; font-size: 1.2rem; }
-    .assembly-part-name { font-size: 1.1rem; color: var(--text-dark); }
-    .video-guides { margin-top: 60px; text-align: center; }
-    .video-guides-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-    .video-guide-btn { background-color: white; color: var(--primary-green); border: 2px solid var(--primary-green); padding: 12px 24px; border-radius: 30px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; text-decoration: none; }
-    .video-guide-btn:hover { background-color: var(--primary-green); color: white; transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0, 153, 51, 0.3); }
-    .order-grid { display: flex; align-items: center; gap: 50px; }
-    .order-image-column { flex: 1; min-width: 300px; }
-    .order-product-image { max-width: 100%; border-radius: 16px; }
-    .order-details-column { flex: 1; min-width: 300px; }
-    .order-promotion-text { color: var(--primary-green); font-weight: 600; margin: 0 0 10px; }
-    .order-price { font-size: 4rem; font-weight: 700; color: var(--text-dark); margin: 0 0 25px; }
-    .order-includes-list { list-style: none; padding: 0; margin: 0 0 30px; }
-    .order-includes-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--text-light); }
-    .order-includes-list .check-icon { color: var(--primary-green); }
-    .order-controls { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; }
-    .qty-label { font-weight: 500; color: var(--text-light); }
-    .qty-selector { display: flex; align-items: center; background-color: #f7f7f7; border-radius: 50px; padding: 5px; }
-    .qty-btn { background: none; border: none; font-size: 1.2rem; font-weight: 600; padding: 5px 15px; cursor: pointer; color: var(--text-light); }
-    .qty-input { width: 40px; text-align: center; border: none; font-size: 1.1rem; font-weight: 600; -moz-appearance: textfield; background: none; }
-    .qty-input::-webkit-outer-spin-button, .qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-    .buy-now-btn { background: var(--primary-green); color: white; border: none; padding: 16px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
-    .buy-now-btn:hover { background-color: var(--dark-green); box-shadow: 0 10px 20px rgba(0, 153, 51, 0.2); transform: translateY(-3px); }
-    .faq-container { max-width: 800px; margin: 0 auto; }
-    .faq-item { border-bottom: 1px solid var(--border-color); }
-    .faq-question { width: 100%; background: none; border: none; text-align: left; padding: 25px 0; font-size: 1.2rem; font-weight: 500; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-icon { width: 14px; height: 14px; position: relative; transition: transform 0.3s ease-in-out; }
-    .faq-icon::before, .faq-icon::after { content: ''; position: absolute; background-color: var(--text-dark); transition: transform 0.3s ease-in-out; }
-    .faq-icon::before { top: 50%; left: 0; width: 100%; height: 2px; transform: translateY(-50%); }
-    .faq-icon::after { top: 0; left: 50%; width: 2px; height: 100%; transform: translateX(-50%); }
-    .faq-icon.open { transform: rotate(135deg); }
-    .faq-answer-wrapper { overflow: hidden; transition: max-height 0.4s ease-in-out; }
-    .faq-answer { padding: 0 0 25px; line-height: 1.8; }
-    .faq-answer p { margin: 0; }
-    .scroll-to-top { position: fixed; bottom: 30px; right: 30px; background-color: var(--primary-green); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(100px); transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1000; }
-    .scroll-to-top.visible { opacity: 1; transform: translateY(0); }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @media (max-width: 1200px) { .hero-title-wrapper { transform: translateX(15%); } }
-    @media (max-width: 992px) { .hero-section { flex-direction: column; height: auto; min-height: 0; margin: 10px; border-radius: 16px; } .hero-green-panel { width: 100%; min-height: 50vh; padding: 40px 20px;} .hero-gray-panel { width: 100%; padding: 60px 20px; display: flex; justify-content: center; align-items: center;} .hero-title-wrapper { transform: none; } .hero-title { font-size: 5rem; } .hero-center-logo { display: none; } .hero-nav { position: static; text-align: center; } .nav-item { justify-content: center; } .nav-item svg { display: none; } }
-    @media (max-width: 768px) { .section-container { padding: 60px 15px; } .section-title { font-size: 2.2rem; } .view-selector img { width: 60px; height: 60px; } .view-selector p { font-size: 0.7rem; } .order-grid { flex-direction: column; text-align: center; } .order-details-column { display: flex; flex-direction: column; align-items: center; } .buy-now-btn { width: 100%; margin-top: 10px; } }
-    @media (max-width: 480px) { .hero-title { font-size: 3.5rem; } .order-price { font-size: 3rem; } }
-  `;
+  useEffect(() => {
+    const hash = window.location.hash.substring(1);
+    const targetRef = navLinks.find((link) => link.id === hash)?.ref;
+    if (targetRef?.current) {
+      setTimeout(() => scrollToSection(targetRef), 100);
+    }
+  }, [navLinks]);
 
   return (
     <>
-      <style>{globalStyles}</style>
-      <div ref={topRef}>
-        <header className="hero-section">
-          {/* ... hero-section JSX ... */}
-          <div className="hero-green-panel">
-            <div className="hero-title-wrapper">
-              <h1 className="hero-title">QR114</h1>
-            </div>
-          </div>
-          <div className="hero-center-logo">
-            <img src={logoImg} alt="Qaf Logo" />
-          </div>
-          <div className="hero-gray-panel">
-            <ul className="hero-nav">
-              {navLinks.map((link) => (
-                <li
-                  key={link.text}
-                  className="nav-item"
-                  onClick={() => scrollToSection(link.ref)}
-                >
-                  {link.text} {link.icon}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </header>
-
-        <main>
-          {/* ... other sections JSX ... */}
-          <div ref={appRef} style={{ backgroundColor: "var(--off-white)" }}>
-            <AnimatedSection>
-              <SectionTitle>Find QR114 App in Your Favorite Store</SectionTitle>
-              <div className="app-store-grid">
-                {appStores.map((store) => (
-                  <div key={store.name} className="app-store-item">
-                    <div className="app-store-icon">{store.icon}</div>
-                    <p>{store.name}</p>
-                  </div>
-                ))}
-              </div>
-            </AnimatedSection>
-          </div>
-          <div ref={productRef}>
-            <AnimatedSection
-              style={{ backgroundColor: "#ffffff", textAlign: "center" }}
-            >
-              <SectionTitle>Quran Reciter QR114</SectionTitle>
-              <div className="product-viewer-container">
-                {activeView === "3D" ? (
-                  <ModelViewer />
-                ) : (
-                  <img
-                    key={activeView}
-                    src={productViews[activeView]}
-                    alt={`QR114 - ${activeView} view`}
-                    className="product-image-main"
-                  />
-                )}
-              </div>
-              <div className="view-selector-grid">
-                {["3D", ...Object.keys(productViews)].map((view) => (
-                  <div
-                    key={view}
-                    onClick={() => setActiveView(view)}
-                    className={`view-selector ${
-                      activeView === view ? "active" : ""
-                    }`}
-                  >
-                    <img
-                      src={view === "3D" ? perspectiveImg : productViews[view]}
-                      alt={view}
-                    />
-                    <p>{view}</p>
-                  </div>
-                ))}
-              </div>
-            </AnimatedSection>
-          </div>
-          <AnimatedSection className="feature-spec-grid">
-            <div className="feature-spec-item">
-              <h3>Specification</h3>
-              <p>
-                Body text for whatever you'd like to say. Add main takeaway
-                points, quotes, anecdotes, or even a very very short story. Body
-                text for whatever you'd like to say. Add main takeaway points,
-                quotes, anecdotes, or even a very very short story. Body text
-                for whatever you'd like to say.
-              </p>
-            </div>
-            <div className="feature-spec-item">
-              <h3>Features</h3>
-              <p>
-                Body text for whatever you'd like to say. Add main takeaway
-                points, quotes, anecdotes, or even a very very short story. Body
-                text for whatever you'd like to say. Add main takeaway points,
-                quotes, anecdotes, or even a very very short story. Body text
-                for whatever you'd like to say.
-              </p>
-            </div>
-          </AnimatedSection>
-          <div style={{ backgroundColor: "var(--off-white)" }}>
-            <AnimatedSection>
-              <SectionTitle>Inside the Box</SectionTitle>
-              <div className="box-image-wrapper">
-                <img src={boxImg} alt="Product Box" className="box-image" />
-              </div>
-              <div className="box-contents-grid">
-                {boxContents.map((item) => (
-                  <div key={item.name} className="box-content-item">
-                    <img src={item.img} alt={item.name} />
-                    <p>{item.name}</p>
-                  </div>
-                ))}
-              </div>
-            </AnimatedSection>
-          </div>
-
-          <AnimatedSection>
-            <SectionTitle>Assembly</SectionTitle>
-            <div className="assembly-grid">
-              <div className="assembly-diagram">
-                <img src={assemblyImg} alt="Assembly diagram" />
-              </div>
-              <div className="assembly-parts">
-                {assemblyParts.map((part) => (
-                  <div key={part.num} className="assembly-part-item">
-                    <span className="assembly-part-num">{part.num}</span>
-                    <span className="assembly-part-name">{part.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            {/* === UPDATED VIDEO GUIDES SECTION === */}
-            <div className="video-guides">
-              <SectionTitle>Getting Started</SectionTitle>
-              <div className="video-guides-grid">
-                {videoGuides.map((guide) => (
-                  <button
-                    key={guide.title}
-                    className="video-guide-btn"
-                    onClick={() => openModal(guide)}
-                  >
-                    <FaVideo /> {guide.title}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
-
-          <div ref={buyRef}>
-            <AnimatedSection>
-              <div className="order-grid">
-                <div className="order-image-column">
-                  <img
-                    src={perspectiveImg}
-                    alt="QR114 Device"
-                    className="order-product-image"
-                  />
-                </div>
-                <div className="order-details-column">
-                  <p className="order-promotion-text">Promotion</p>
-                  <div className="order-price">$50.00</div>
-                  <ul className="order-includes-list">
-                    {orderIncludes.map((item) => (
-                      <li key={item}>
-                        <FaCheck className="check-icon" /> {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="order-controls">
-                    <span className="qty-label">Qty:</span>
-                    <div className="qty-selector">
-                      <button
-                        className="qty-btn"
-                        onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                      >
-                        -
-                      </button>
-                      <input
-                        type="number"
-                        className="qty-input"
-                        value={quantity}
-                        onChange={(e) =>
-                          setQuantity(
-                            Math.max(1, parseInt(e.target.value) || 1)
-                          )
-                        }
-                      />
-                      <button
-                        className="qty-btn"
-                        onClick={() => setQuantity((q) => q + 1)}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <button className="buy-now-btn">Buy Now</button>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-
-          <div ref={supportRef} style={{ backgroundColor: "var(--off-white)" }}>
-            <AnimatedSection>
-              <SectionTitle>FAQ</SectionTitle>
-              <div className="faq-container">
-                {faqData.map((faq, index) => (
-                  <FaqItem
-                    key={index}
-                    question={faq.question}
-                    answer={faq.answer}
-                  />
-                ))}
-              </div>
-            </AnimatedSection>
-          </div>
-        </main>
-
-        <Footer />
-
-        <button
-          className={`scroll-to-top ${isScrolled ? "visible" : ""}`}
-          onClick={() => scrollToSection(topRef)}
-          aria-label="Scroll to top"
-        >
-          <FaArrowUp size={22} />
-        </button>
+      <LanguageSwitcher />
+      <div ref={topRef} id="home">
+        <HeroSection navLinks={navLinks} scrollToSection={scrollToSection} />
       </div>
-
-      {/* === RENDER THE MODAL HERE === */}
+      <main>
+        <div ref={productRef}>
+          <ProductViewer
+            activeView={activeView}
+            setActiveView={setActiveView}
+          />
+        </div>
+        <FeatureSpecSection />
+        <div className="bg-off-white cohesive-section">
+          <div ref={appRef}>
+            <AppSection />
+          </div>
+          <BoxContentsSection />
+        </div>
+        <div ref={assemblyRef}>
+          <AssemblySection openModal={openModal} />
+        </div>
+        <DistributorSection />
+        <div className="bg-off-white cohesive-section">
+          <div ref={supportRef}>
+            <FaqSection />
+          </div>
+        </div>
+      </main>
+      <Footer />
+      <FinePrintSection />
+      <button
+        className={`scroll-to-top ${isScrolled ? "visible" : ""}`}
+        onClick={() => scrollToSection(topRef)}
+        aria-label="Scroll to top"
+      >
+        <FaArrowUp size={22} />
+      </button>
       <VideoModal
         isOpen={modalVideo.isOpen}
         onClose={closeModal}
@@ -574,4 +1072,10 @@ function ProductPage() {
   );
 }
 
-export default ProductPage;
+export default function ProductPageWrapper() {
+  return (
+    <Suspense fallback={<div className="loading-fallback">Loading...</div>}>
+      <ProductPage />
+    </Suspense>
+  );
+}

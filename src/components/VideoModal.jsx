@@ -24,7 +24,7 @@ const modalStyles = `
 
   .video-modal-content {
     background-color: #1c1c1c;
-    padding: 20px;
+    padding-top: 20px;
     border-radius: 16px;
     position: relative;
     width: 90%;
@@ -100,7 +100,7 @@ function VideoModal({ isOpen, onClose, videoUrl, title }) {
       <div className={`video-modal-overlay ${isOpen ? 'open' : ''}`} onClick={onClose}>
         <div className="video-modal-content" onClick={(e) => e.stopPropagation()}>
           <div className="video-modal-header">
-            <h3>{title}</h3>
+            <h3 style={{marginLeft:"16px"}}>{title}</h3>
             <button className="video-modal-close-btn" onClick={onClose}>×</button>
           </div>
           <div className="video-player-wrapper">

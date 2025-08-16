@@ -1,0 +1,85 @@
+{
+  "nav": {
+    "home": "Home",
+    "app": "APP",
+    "product": "Product",
+    "assembly": "Assembly",
+    "buy": "Buy",
+    "support": "Support"
+  },
+  "productTitle": "Quran Reciter QR114",
+  "productViews": {
+    "perspective": "Perspective",
+    "front": "Front",
+    "right": "Right",
+    "back": "Back",
+    "left": "Left",
+    "top": "Top"
+  },
+  "specSection": {
+    "title": "Specification",
+    "text": "Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story. Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story. Body text for whatever you'd like to say."
+  },
+  "featureSection": {
+    "title": "Features",
+    "text": "Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story. Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story. Body text for whatever you'd like to say."
+  },
+  "boxSection": {
+    "title": "Inside the Box",
+    "item1": "QR114 Device x 1",
+    "item2": "18650 2200 mAh x 2",
+    "item3": "Anchoring Template x 1",
+    "item4": "Clean Wipes x 2",
+    "item5": "3M Double-sided Pad x 1",
+    "item6": "M12 Anchor Bolt x 2"
+  },
+  "appSection": {
+    "title": "Find QR114 App in Your Favorite Store",
+    "ios": "iOS App Store",
+    "google": "Google Play",
+    "huawei": "AppGallery",
+    "xiaomi": "Xiaomi Store",
+    "apk": "APK Download"
+  },
+  "assemblySection": {
+    "title": "Assembly",
+    "part1": "Device",
+    "part2": "On / Off Switch",
+    "part3": "18650 Battery x 2",
+    "part4": "Battery Cover",
+    "part5": "Back Cover",
+    "gettingStartedTitle": "Getting Started",
+    "video1": "App Installation Video",
+    "video2": "Device Assembly Video",
+    "video3": "Device Installation Video"
+  },
+  "buySection": {
+    "promotion": "Promotion",
+    "price": "$50.00",
+    "includes": {
+      "item1": "QR114 Device",
+      "item2": "Control APP",
+      "item3": "18650 2200 mAh x 2 Batteries",
+      "item4": "Anchor Bolt & Template",
+      "item5": "3M Double side Pad and Clean Wips"
+    },
+    "quantity": "Qty:",
+    "buyNow": "Buy Now"
+  },
+  "faqSection": {
+    "title": "FAQ",
+    "q1": "What is the battery life of the QR114?",
+    "a1": "The QR114 is designed for 24/7 non-stop operation. It comes with two high-capacity 18650 batteries and can be mains powered for continuous recitation.",
+    "q2": "How do I control the device?",
+    "a2": "The device is fully controlled via our dedicated mobile app, available for iOS and Android. It connects using Bluetooth 5.3 for a stable and responsive experience.",
+    "q3": "What content is pre-loaded on the device?",
+    "a3": "The device comes with 32GB of internal storage, pre-loaded with a wide selection of complete Quran recitations from various renowned Qaris. You can manage and select reciters through the app.",
+    "q4": "Is the installation process difficult?",
+    "a4": "Not at all. We provide a complete mounting kit, including an anchoring template, 3M adhesive pad, and anchor bolts, to suit different wall types. We also have detailed video guides to walk you through the process."
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "text": "Welcome to QR114. Your privacy is critically important to us. This Privacy Policy document outlines the types of information that is collected and recorded by the QR114 device and its companion mobile application (collectively, \"the Service\") and how we use it. 1. Information We Collect We may collect the following types of information: Personal Identification Information: We may ask you to provide us with certain personally identifiable information that can be used to contact or identify you, such as your email address when you create an account or contact support. Device and Usage Data: We automatically collect information about your device and how you interact with our Service. This may include your device's IP address, device type, operating system version, the app's features that you visit, the time and date of your visit, the time spent on those features, and other diagnostic data. Bluetooth Data: The app uses Bluetooth to communicate with the QR114 device. We collect data related to the connection status and commands sent to the device to ensure proper functionality. 2. How We Use Your Information We use the collected data for various purposes: To provide, maintain, and improve our Service. To manage your account and provide you with customer support. To monitor the usage of our Service and detect, prevent, and address technical issues. To communicate with you about updates, security alerts, and support messages. 3. Data Sharing and Disclosure We do not sell, trade, or rent your personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information with our business partners for analytics and service improvement purposes. We may disclose your information if required by law or in response to valid requests by public authorities. 4. Data Security The security of your data is important to us. We strive to use commercially acceptable means to protect your Personal Information, but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we aim to protect your data, we cannot guarantee its absolute security. 5. Changes to This Privacy Policy We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page. 6. Contact Us If you have any questions about this Privacy Policy, please contact us by visiting the support section on our website."
+  },
+  "scrollToTop": "Scroll to top"
+}

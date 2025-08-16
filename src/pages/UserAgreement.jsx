@@ -64,7 +64,7 @@ const LegalPageStyles = `
 
   .legal-content ul {
     list-style-type: disc;
-    padding-left: 20px;
+    padding-left: 25px;
   }
   
   .legal-content a {
@@ -94,40 +94,68 @@ function UserAgreement() {
       <div className="legal-container">
         <div className="legal-hero">
           <h1>User Agreement</h1>
-          <p>Last Updated: {new Date().toLocaleString()}</p>
+          <p>Last Updated: August 03, 2025</p>
         </div>
 
         <div className="legal-content">
+          <h2>1. Introduction and Acceptance</h2>
           <p>
-            This User Agreement ("Agreement") is a legal agreement between you and RHKCL ("Company," "we," "us," or "our") governing your use of the QR114 device and its companion mobile application (collectively, the "Service"). By accessing or using the Service, you agree to be bound by this Agreement.
+            Welcome to QR114. This User Agreement ("Agreement" or "Terms") is a legally binding contract between you ("You", "User") and <strong>RAOSS HK COMPANY LIMITED</strong> ("Company", "We", "Us", "Our"). This Agreement governs your access to and use of the QR114 software application ("Application") and any related services (collectively, the "Service").
+          </p>
+          <p>
+            <strong>By creating an account, or by accessing or using the Service, you acknowledge that you have read, understood, and agree to be bound by these Terms and our <a href="/privacy-policy">Privacy Policy</a>, which is incorporated herein by reference.</strong> If you do not agree to these Terms, you may not access or use the Service.
           </p>
 
-          <h2>1. Description of Service</h2>
-          <p>The QR114 Service provides users with a dedicated device for listening to Quranic recitations, controlled via a mobile application. The Service includes the physical device, its firmware, the mobile app, and any updates or support services provided by the Company.</p>
-          
           <h2>2. User Accounts</h2>
-          <p>To access certain features of the mobile application, you may be required to create an account. You are responsible for safeguarding your account information and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account.</p>
+          <p>To use certain features of the Service, you may be required to register for an account. When you create an account, you agree to:</p>
+          <ul>
+            <li>Provide accurate, current, and complete information as prompted by our registration forms.</li>
+            <li>Maintain the security of your password and accept all risks of unauthorized access to your account.</li>
+            <li>Promptly notify us if you discover or otherwise suspect any security breaches related to the Service or your account.</li>
+          </ul>
+          <p>You are solely responsible for all activities that occur under your account.</p>
 
           <h2>3. Intellectual Property Rights</h2>
-          <p>The Service and its original content (excluding Quranic recitations, which are public domain or licensed), features, and functionality are and will remain the exclusive property of the Company and its licensors. The Service is protected by copyright, trademark, and other laws. Our trademarks may not be used in connection with any product or service without the prior written consent of the Company.</p>
+          <p>The Service, including the Application's design, graphics, user interface, source code, and all content other than Quranic recitations, are the exclusive property of the Company and its licensors. These are protected by copyright, trademark, and other intellectual property laws. The Quranic audio content provided through the Service is either in the public domain or is used under license and is not claimed as the intellectual property of the Company.</p>
+          <p>Our trademarks, trade names, and logos, including "QR114," may not be used in connection with any product or service without our prior written consent.</p>
 
-          <h2>4. Prohibited Activities</h2>
-          <p>You agree not to use the Service for any purpose that is illegal or prohibited by this Agreement. You may not:</p>
+          <h2>4. Permitted Use and Prohibited Activities</h2>
+          <p>We grant you a limited, non-exclusive, non-transferable, and revocable license to use the Service for your personal, non-commercial use in accordance with these Terms.</p>
+          <p>You agree that you will not:</p>
           <ul>
-            <li>Reverse engineer, decompile, disassemble, or otherwise attempt to derive the source code of the device firmware or mobile application.</li>
-            <li>Use the Service in any manner that could damage, disable, overburden, or impair the Service.</li>
-            <li>Attempt to gain unauthorized access to any part of the Service or its related systems or networks.</li>
-            <li>Use the Service for any commercial purpose without our express written permission.</li>
+            <li>Use the Service for any illegal or unauthorized purpose or engage in, encourage, or promote any activity that violates these Terms.</li>
+            <li>Modify, adapt, translate, reverse engineer, decompile, or disassemble any portion of the Service.</li>
+            <li>Sell, rent, lease, or otherwise transfer your rights to the Service to any third party.</li>
+            <li>Use any robot, spider, or other automated means to access the Service for any purpose without our express written permission.</li>
+            <li>Interfere with or disrupt the integrity or performance of the Service or its servers and networks.</li>
           </ul>
 
           <h2>5. Termination</h2>
-          <p>We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Agreement. All provisions of the Agreement which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity, and limitations of liability.</p>
-          
-          <h2>6. Disclaimer of Warranties & Limitation of Liability</h2>
-          <p>The Service is provided on an "AS IS" and "AS AVAILABLE" basis. The Company makes no warranties, expressed or implied, and hereby disclaims all other warranties. In no event shall the Company be liable for any special, direct, indirect, or consequential damages whatsoever arising out of the use of or inability to use the Service.</p>
+          <p>We reserve the right to suspend or terminate your access to the Service at our sole discretion, without notice or liability, for any reason, including but not limited to a breach of this Agreement.</p>
+          <p>Upon termination, your right to use the Service will immediately cease. If you wish to terminate your account, you may do so by contacting us or through the account settings in the Application. All provisions of the Agreement which by their nature should survive termination shall survive, including ownership provisions, warranty disclaimers, indemnity, and limitations of liability.</p>
 
-          <h2>7. Governing Law</h2>
-          <p>This Agreement shall be governed and construed in accordance with the laws of the jurisdiction in which the Company is established, without regard to its conflict of law provisions.</p>
+          <h2>6. Disclaimer of Warranties & Limitation of Liability</h2>
+          <p>
+            THE SERVICE IS PROVIDED ON AN <strong>"AS IS"</strong> AND <strong>"AS AVAILABLE"</strong> BASIS, WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+          </p>
+          <p>
+            IN NO EVENT SHALL THE COMPANY, ITS DIRECTORS, EMPLOYEES, OR AFFILIATES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM (I) YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICE; (II) ANY UNAUTHORIZED ACCESS TO OR USE OF OUR SERVERS AND/OR ANY PERSONAL INFORMATION STORED THEREIN; (III) ANY BUGS, VIRUSES, TROJAN HORSES, OR THE LIKE THAT MAY BE TRANSMITTED TO OR THROUGH OUR SERVICE BY ANY THIRD PARTY.
+          </p>
+
+          <h2>7. Governing Law and Dispute Resolution</h2>
+          <p>This Agreement shall be governed and construed in accordance with the laws of Hong Kong Special Administrative Region of the People's Republic of China, without regard to its conflict of law provisions.</p>
+          <p>Any dispute arising from or relating to this Agreement shall be subject to the exclusive jurisdiction of the courts of Hong Kong S.A.R.</p>
+          
+          <h2>8. Changes to This Agreement</h2>
+          <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. We will notify you by email or through a prominent notice within the Application.</p>
+          <p>By continuing to access or use our Service after any revisions become effective, you agree to be bound by the revised terms.</p>
+
+          <h2>9. Contact Us</h2>
+          <p>If you have any questions about this User Agreement, please contact us:</p>
+          <ul>
+            <li>By email: <a href="mailto:admin@raoss.com">admin@raoss.com</a></li>
+            <li>By visiting this page on our website: <a href="http://qr114.com/" target="_blank" rel="noopener noreferrer">http://qr114.com/</a></li>
+          </ul>
         </div>
       </div>
       <Footer />
