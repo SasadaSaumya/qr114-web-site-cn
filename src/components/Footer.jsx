@@ -95,8 +95,8 @@ function Footer() {
               User Agreement
             </p>
             <p>RHKCL Hong Kong</p>
-            <p>Patent Pending XXXXXXXXXXXXXXXXXX</p>
-            <p>ICP XXXXXXXX</p>
+            <p>Patent 2025216968622 / 2025304713613</p>
+            <p>粤ICP备2025454823号</p>
             <p>© {new Date().getFullYear()} RHKCL</p>
           </div>
           <div className="footer-gift-logo">

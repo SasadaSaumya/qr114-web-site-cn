@@ -1,27 +1,33 @@
+// src/i18n.js
+
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import HttpApi from 'i18next-http-backend';
+
+// Import your translation files
+import enTranslation from '../public/locales/en/translation.json';
+import zhTranslation from '../public/locales/zh/translation.json';
 
 i18n
-  // i18next-http-backend: loads translations from your /public/locales folder
-  .use(HttpApi)
-  // detect user language
+  // Detect user language
   .use(LanguageDetector)
-  // pass the i18n instance to react-i18next.
+  // Pass the i18n instance to react-i18next.
   .use(initReactI18next)
-  // init i18next
+  // Init i18next
   .init({
-    supportedLngs: ['en', 'ar', 'id', 'ja', 'ms', 'tr', 'zh'],
-    fallbackLng: "en",
-    detection: {
-      order: ['path', 'cookie', 'htmlTag', 'localStorage', 'subdomain'],
-      caches: ['cookie'],
+    debug: true, // Set to false in production
+    fallbackLng: "en", // Use English if detected language is not available
+    interpolation: {
+      escapeValue: false, // React already safes from xss
     },
-    backend: {
-      loadPath: '/locales/{{lng}}/translation.json',
+    resources: {
+      en: {
+        translation: enTranslation,
+      },
+      zh: {
+        translation: zhTranslation,
+      },
     },
-    react: { useSuspense: false }
   });
 
 export default i18n;
