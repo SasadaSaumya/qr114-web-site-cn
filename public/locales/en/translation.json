@@ -238,6 +238,12 @@
       ]
     }
   },
+  "footer": {
+    "contact": "Contact Us",
+    "privacy": "Privacy Policy",
+    "agreement": "User Agreement",
+    "copyright": "© {{year}} Hong Kong Raoss Trading Co., Limited Foshan Representative Office"
+  },
   "privacyPolicy": {
     "title": "Privacy Policy",
     "lastUpdated": "Last updated: August 03, 2025",
