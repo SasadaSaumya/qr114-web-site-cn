@@ -174,9 +174,73 @@
     "q4": "Is the installation process difficult?",
     "a4": "Not at all. We provide a complete mounting kit, including an anchoring template, 3M adhesive pad, and anchor bolts, to suit different wall types. We also have detailed video guides to walk you through the process."
   },
+  "userAgreement": {
+    "title": "User Agreement",
+    "lastUpdated": "Last Updated: August 03, 2025",
+    "introduction": {
+      "title": "1. Introduction and Acceptance",
+      "p1": "Welcome to QR114. This User Agreement ('Agreement' or 'Terms') is a legally binding contract between you ('You', 'User') and <strong>香港瑞安斯贸易有限公司佛山代表处</strong> ('Company', 'We', 'Us', 'Our'). This Agreement governs your access to and use of the QR114 software application ('Application') and any related services (collectively, the 'Service').",
+      "p2": "<strong>By creating an account, or by accessing or using the Service, you acknowledge that you have read, understood, and agree to be bound by these Terms and our <1>Privacy Policy</1>, which is incorporated herein by reference.</strong> If you do not agree to these Terms, you may not access or use the Service."
+    },
+    "accounts": {
+      "title": "2. User Accounts",
+      "p1": "To use certain features of the Service, you may be required to register for an account. When you create an account, you agree to:",
+      "list": [
+        "Provide accurate, current, and complete information as prompted by our registration forms.",
+        "Maintain the security of your password and accept all risks of unauthorized access to your account.",
+        "Promptly notify us if you discover or otherwise suspect any security breaches related to the Service or your account."
+      ],
+      "p2": "You are solely responsible for all activities that occur under your account."
+    },
+    "intellectualProperty": {
+      "title": "3. Intellectual Property Rights",
+      "p1": "The Service, including the Application's design, graphics, user interface, source code, and all content other than Quranic recitations, are the exclusive property of the Company and its licensors. These are protected by copyright, trademark, and other intellectual property laws. The Quranic audio content provided through the Service is either in the public domain or is used under license and is not claimed as the intellectual property of the Company.",
+      "p2": "Our trademarks, trade names, and logos, including 'QR114,' may not be used in connection with any product or service without our prior written consent."
+    },
+    "permittedUse": {
+      "title": "4. Permitted Use and Prohibited Activities",
+      "p1": "We grant you a limited, non-exclusive, non-transferable, and revocable license to use the Service for your personal, non-commercial use in accordance with these Terms.",
+      "p2": "You agree that you will not:",
+      "list": [
+        "Use the Service for any illegal or unauthorized purpose or engage in, encourage, or promote any activity that violates these Terms.",
+        "Modify, adapt, translate, reverse engineer, decompile, or disassemble any portion of the Service.",
+        "Sell, rent, lease, or otherwise transfer your rights to the Service to any third party.",
+        "Use any robot, spider, or other automated means to access the Service for any purpose without our express written permission.",
+        "Interfere with or disrupt the integrity or performance of the Service or its servers and networks."
+      ]
+    },
+    "termination": {
+      "title": "5. Termination",
+      "p1": "We reserve the right to suspend or terminate your access to the Service at our sole discretion, without notice or liability, for any reason, including but not limited to a breach of this Agreement.",
+      "p2": "Upon termination, your right to use the Service will immediately cease. If you wish to terminate your account, you may do so by contacting us or through the account settings in the Application. All provisions of the Agreement which by their nature should survive termination shall survive, including ownership provisions, warranty disclaimers, indemnity, and limitations of liability."
+    },
+    "disclaimer": {
+      "title": "6. Disclaimer of Warranties & Limitation of Liability",
+      "p1": "THE SERVICE IS PROVIDED ON AN <strong>'AS IS'</strong> AND <strong>'AS AVAILABLE'</strong> BASIS, WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.",
+      "p2": "IN NO EVENT SHALL THE COMPANY, ITS DIRECTORS, EMPLOYEES, OR AFFILIATES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM (I) YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICE; (II) ANY UNAUTHORIZED ACCESS TO OR USE OF OUR SERVERS AND/OR ANY PERSONAL INFORMATION STORED THEREIN; (III) ANY BUGS, VIRUSES, TROJAN HORSES, OR THE LIKE THAT MAY BE TRANSMITTED TO OR THROUGH OUR SERVICE BY ANY THIRD PARTY."
+    },
+    "governingLaw": {
+      "title": "7. Governing Law and Dispute Resolution",
+      "p1": "This Agreement shall be governed and construed in accordance with the laws of Hong Kong Special Administrative Region of the People's Republic of China, without regard to its conflict of law provisions.",
+      "p2": "Any dispute arising from or relating to this Agreement shall be subject to the exclusive jurisdiction of the courts of Hong Kong S.A.R."
+    },
+    "changes": {
+      "title": "8. Changes to This Agreement",
+      "p1": "We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. We will notify you by email or through a prominent notice within the Application.",
+      "p2": "By continuing to access or use our Service after any revisions become effective, you agree to be bound by the revised terms."
+    },
+    "contact": {
+      "title": "9. Contact Us",
+      "p1": "If you have any questions about this User Agreement, please contact us:",
+      "list": [
+        "By email: <a href=\"mailto:admin@raoss.com\">admin@raoss.com</a>",
+        "By visiting this page on our website: <a href=\"http://qr114.com.cn\" target=\"_blank\" rel=\"noopener noreferrer\">http://qr114.com.cn</a>"
+      ]
+    }
+  },
   "privacyPolicy": {
     "title": "Privacy Policy",
-     "lastUpdated": "Last updated: August 03, 2025", 
+    "lastUpdated": "Last updated: August 03, 2025",
     "intro": {
       "p1": "This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.",
       "p2": "We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the Privacy Policy Generator."
