@@ -9,7 +9,7 @@
     "buy": "经销商",
     "support": "常见问题"
   },
-  "productTitle": "古兰经诵读器 QR114",
+  "productTitle": "户外的 古兰经诵读器 QR114",
   "productViews": {
     "perspective": "透视图",
     "front": "正面",
@@ -59,30 +59,59 @@
       ]
     }
   },
+  "distributorSection": {
+    "title": "想成为经销商吗？",
+    "subtitle": "联系我们"
+  },
+  "distributorForm": {
+    "nameLabel": "姓名",
+    "namePlaceholder": "请输入您的姓名",
+    "companyLabel": "公司名称",
+    "companyPlaceholder": "请输入您的公司名称",
+    "emailLabel": "电子邮件",
+    "emailPlaceholder": "请输入您的电子邮件",
+    "messageLabel": "信息",
+    "messagePlaceholder": "请输入您的信息",
+    "submitButton": "提交",
+    "submittingButton": "提交中...",
+    "networkError": "网络错误，请重试。"
+  },
   "specifications": {
     "compliance": {
       "title": "合规性",
-      "points": ["SASO SIRC, CITC, PIPL, RoHS, Halal 认证"]
+      "points": [
+        "SASO SIRC, CITC, PIPL, RoHS, Halal 认证"
+      ]
     },
     "memory": {
       "title": "内存",
-      "points": ["32GB 内置存储"]
+      "points": [
+        "32GB 内置存储"
+      ]
     },
     "connectivity": {
       "title": "连接性",
-      "points": ["蓝牙 5.3 @ 1 MBPS"]
+      "points": [
+        "蓝牙 5.3 @ 1 MBPS"
+      ]
     },
     "languages": {
       "title": "语言",
-      "points": ["英语、阿拉伯语、中文、土耳其语、马来语、印度尼西亚语"]
+      "points": [
+        "英语、阿拉伯语、中文、土耳其语、马来语、印度尼西亚语"
+      ]
     },
     "solar": {
       "title": "太阳能系统",
-      "points": ["内置 6V / 5W"]
+      "points": [
+        "内置 6V / 5W"
+      ]
     },
     "waterproofing": {
       "title": "防水性",
-      "points": ["IPX5（防雨/防尘）"]
+      "points": [
+        "IPX5（防雨/防尘）"
+      ]
     },
     "dimensions": {
       "title": "尺寸与重量",
@@ -95,7 +124,9 @@
     },
     "shipping": {
       "title": "运输",
-      "points": ["主纸箱：10 套"]
+      "points": [
+        "主纸箱：10 套"
+      ]
     }
   },
   "boxSection": {
@@ -145,6 +176,7 @@
   },
   "privacyPolicy": {
     "title": "隐私政策",
+    "lastUpdated": "最后更新：2025年8月3日",
     "intro": {
       "p1": "本隐私政策描述了我们在您使用服务时收集、使用和披露您信息的政策和程序，并告知您您的隐私权利以及法律如何保护您。",
       "p2": "我们使用您的个人数据来提供和改进服务。使用服务即表示您同意我们根据本隐私政策收集和使用信息。本隐私政策是在隐私政策生成器的帮助下创建的。"
@@ -177,7 +209,10 @@
       "personalData": {
         "title": "个人数据",
         "p1": "在使用我们的服务时，我们可能会要求您提供某些可用于联系或识别您的个人身份信息。个人身份信息可能包括但不限于：",
-        "list": ["电子邮件地址", "使用数据"]
+        "list": [
+          "电子邮件地址",
+          "使用数据"
+        ]
       },
       "usageData": {
         "title": "使用数据",
@@ -189,7 +224,9 @@
       "appInfo": {
         "title": "使用应用程序时收集的信息",
         "p1": "在使用我们的应用程序时，为了提供我们应用程序的功能，我们可能会在您事先许可的情况下收集：",
-        "list": ["有关您位置的信息"],
+        "list": [
+          "有关您位置的信息"
+        ],
         "p2": "我们使用这些信息来提供我们服务的功能，以改进和定制我们的服务。这些信息可能会上传到公司的服务器和/或服务提供商的服务器，或者可能只是存储在您的设备上。",
         "p3": "您可以随时通过您的设备设置启用或禁用对此信息的访问。"
       }

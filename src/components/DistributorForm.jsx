@@ -2,8 +2,11 @@
 
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
+import { useTranslation } from "react-i18next"; // 1. Import the hook
 
 function DistributorForm() {
+  const { t } = useTranslation(); // 2. Initialize the translation function
+
   const [formData, setFormData] = useState({
     name: "",
     company_name: "", // Use snake_case to match Laravel validation
@@ -24,15 +27,18 @@ function DistributorForm() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://api.qr114.com/api/distributor-contact", {
-        // Call the new endpoint
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://api.qr114.com/api/distributor-contact",
+        {
+          // Call the new endpoint
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const result = await response.json();
 
@@ -50,21 +56,23 @@ function DistributorForm() {
       }
     } catch (error) {
       console.error("Distributor form submission error:", error);
-      toast.error("A network error occurred. Please try again.");
+      // 3. Use the translated string for frontend-specific errors
+      toast.error(t("distributorForm.networkError"));
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
+    // 4. Replace all hardcoded text with the t() function
     <form onSubmit={handleSubmit}>
       <div className="form-group">
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name">{t("distributorForm.nameLabel")}</label>
         <input
           type="text"
           id="name"
           name="name"
-          placeholder="Enter your name"
+          placeholder={t("distributorForm.namePlaceholder")}
           value={formData.name}
           onChange={handleChange}
           required
@@ -72,12 +80,14 @@ function DistributorForm() {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="company_name">Company Name</label>
+        <label htmlFor="company_name">
+          {t("distributorForm.companyLabel")}
+        </label>
         <input
           type="text"
           id="company_name"
-          name="company_name" // snake_case
-          placeholder="Enter your Company Name"
+          name="company_name"
+          placeholder={t("distributorForm.companyPlaceholder")}
           value={formData.company_name}
           onChange={handleChange}
           required
@@ -85,12 +95,12 @@ function DistributorForm() {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">{t("distributorForm.emailLabel")}</label>
         <input
           type="email"
           id="email"
           name="email"
-          placeholder="Enter your email"
+          placeholder={t("distributorForm.emailPlaceholder")}
           value={formData.email}
           onChange={handleChange}
           required
@@ -98,11 +108,11 @@ function DistributorForm() {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="message">Message</label>
+        <label htmlFor="message">{t("distributorForm.messageLabel")}</label>
         <textarea
           id="message"
           name="message"
-          placeholder="Enter your message"
+          placeholder={t("distributorForm.messagePlaceholder")}
           rows="4"
           value={formData.message}
           onChange={handleChange}
@@ -111,7 +121,9 @@ function DistributorForm() {
         ></textarea>
       </div>
       <button type="submit" className="submit-btn" disabled={isSubmitting}>
-        {isSubmitting ? "Submitting..." : "Submit"}
+        {isSubmitting
+          ? t("distributorForm.submittingButton")
+          : t("distributorForm.submitButton")}
       </button>
     </form>
   );

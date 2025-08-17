@@ -2,21 +2,25 @@
 
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
+// We remove LanguageDetector because we want to force a specific default language.
+// import LanguageDetector from "i18next-browser-languagedetector";
 
 // Import your translation files
 import enTranslation from '../public/locales/en/translation.json';
 import zhTranslation from '../public/locales/zh/translation.json';
 
 i18n
-  // Detect user language
-  .use(LanguageDetector)
-  // Pass the i18n instance to react-i18next.
+  // .use(LanguageDetector) // <-- 1. Remove or comment out this line
   .use(initReactI18next)
-  // Init i18next
   .init({
-    debug: true, // Set to false in production
-    fallbackLng: "en", // Use English if detected language is not available
+    debug: process.env.NODE_ENV === 'development', // Show logs only in development
+    
+    // 2. Set the initial language to Chinese ('zh')
+    lng: "zh", 
+
+    // 3. Set a fallback language in case 'zh' fails or a language is missing
+    fallbackLng: "en", 
+
     interpolation: {
       escapeValue: false, // React already safes from xss
     },
