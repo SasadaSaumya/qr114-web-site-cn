@@ -100,7 +100,7 @@ function UserAgreement() {
         <div className="legal-content">
           <h2>1. Introduction and Acceptance</h2>
           <p>
-            Welcome to QR114. This User Agreement ("Agreement" or "Terms") is a legally binding contract between you ("You", "User") and <strong>RAOSS HK COMPANY LIMITED</strong> ("Company", "We", "Us", "Our"). This Agreement governs your access to and use of the QR114 software application ("Application") and any related services (collectively, the "Service").
+            Welcome to QR114. This User Agreement ("Agreement" or "Terms") is a legally binding contract between you ("You", "User") and <strong>香港瑞安斯贸易有限公司佛山代表处</strong> ("Company", "We", "Us", "Our"). This Agreement governs your access to and use of the QR114 software application ("Application") and any related services (collectively, the "Service").
           </p>
           <p>
             <strong>By creating an account, or by accessing or using the Service, you acknowledge that you have read, understood, and agree to be bound by these Terms and our <a href="/privacy-policy">Privacy Policy</a>, which is incorporated herein by reference.</strong> If you do not agree to these Terms, you may not access or use the Service.

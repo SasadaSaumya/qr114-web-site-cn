@@ -5,7 +5,6 @@ import ContactModal from "./ContactModal";
 import giftLogo from "../assets/gift_your_loved_ones_logo.png";
 import logoImg from "../assets/white_logo.png";
 
-
 // Using external link for the main logo for consistency
 
 const footerStyles = `
@@ -82,22 +81,27 @@ function Footer() {
             <p onClick={openModal}>Contact Us</p>
             <p
               onClick={() => {
-                window.location.href = "https://qr114.com/privacy-policy";
+                window.location.href = "https://qr114.com.cn/privacy-policy";
               }}
             >
               Privacy Policy
             </p>
             <p
               onClick={() => {
-                window.location.href = "https://qr114.com/user-agreement";
+                window.location.href = "https://qr114.com.cn/user-agreement";
               }}
             >
               User Agreement
             </p>
-            <p>RHKCL Hong Kong</p>
             <p>Patent 2025216968622 / 2025304713613</p>
-            <p>粤ICP备2025454823号</p>
-            <p>© {new Date().getFullYear()} RHKCL</p>
+            <p
+              onClick={() => {
+                window.location.href = "https://beian.miit.gov.cn";
+              }}
+            >
+              粤ICP备2025454823号
+            </p>
+            <p>© {new Date().getFullYear()} 香港瑞安斯贸易有限公司佛山代表处</p>
           </div>
           <div className="footer-gift-logo">
             <img src={giftLogo} alt="Gift Your Loved Ones" />

@@ -122,7 +122,7 @@ function PrivacyPolicy() {
             <li><strong>Account</strong> means a unique account created for You to access our Service or parts of our Service.</li>
             <li><strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.</li>
             <li><strong>Application</strong> refers to QR114, the software program provided by the Company.</li>
-            <li><strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to RAOSS HK COMPANY LIMITED, UNIT B, ON 9/F, THOMSON COMMERCIAL BUILDING, NO. 8, THOMSON ROAD, WAN CHAI, HONG KONG.</li>
+            <li><strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to 香港瑞安斯贸易有限公司佛山代表处, 佛山市南海区桂城南海大道北20号金安大厦1012之18.</li>
             <li><strong>Country</strong> refers to: China</li>
             <li><strong>Device</strong> means any device that can access the Service such as a computer, a cellphone or a digital tablet.</li>
             <li><strong>Personal Data</strong> is any information that relates to an identified or identifiable individual.</li>
@@ -228,7 +228,7 @@ function PrivacyPolicy() {
           <p>If you have any questions about this Privacy Policy, You can contact us:</p>
           <ul>
             <li>By email: <a href="mailto:admin@raoss.com">admin@raoss.com</a></li>
-            <li>By visiting this page on our website: <a href="https://qr114.com/" target="_blank" rel="noopener noreferrer">https://qr114.com/</a></li>
+            <li>By visiting this page on our website: <a href="https://qr114.com.cn" target="_blank" rel="noopener noreferrer">https://qr114.com.cn</a></li>
           </ul>
         </div>
       </div>
