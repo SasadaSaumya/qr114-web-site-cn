@@ -90,7 +90,7 @@ function Footer() {
             >
               {t("footer.agreement")}
             </p>
-            <p>Patent 2025216968622 / 2025304713613</p>
+            <p>{t("footer.patent")} 2025216968622 / 2025304713613</p>
             <p
               onClick={() => {
                 window.location.href = "https://beian.miit.gov.cn";

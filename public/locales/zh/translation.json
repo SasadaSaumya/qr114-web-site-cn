@@ -178,7 +178,8 @@
     "contact": "联系我们",
     "privacy": "隐私政策",
     "agreement": "用户协议",
-    "copyright": "© {{year}} 香港瑞安斯贸易有限公司佛山代表处"
+    "copyright": "© {{year}} 香港瑞安斯贸易有限公司佛山代表处",
+    "patent":"专利"
   },
   "userAgreement": {
     "title": "用户协议",

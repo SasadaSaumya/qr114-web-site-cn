@@ -242,7 +242,8 @@
     "contact": "Contact Us",
     "privacy": "Privacy Policy",
     "agreement": "User Agreement",
-    "copyright": "© {{year}} Hong Kong Raoss Trading Co., Limited Foshan Representative Office"
+    "copyright": "© {{year}} Hong Kong Raoss Trading Co., Limited Foshan Representative Office",
+     "patent":"patent"
   },
   "privacyPolicy": {
     "title": "Privacy Policy",
